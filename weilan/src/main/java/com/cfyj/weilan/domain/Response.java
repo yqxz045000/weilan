@@ -21,6 +21,14 @@ public class Response extends BaseDomain{
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+
+	public Response() {
+		super();
+	}
+	public Response(CodeDict codeDict) {
+		this.setCode(codeDict.getCode());
+		this.setMsg(codeDict.getDesc());
+	}
 	
 	
 }
