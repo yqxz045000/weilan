@@ -24,5 +24,7 @@ public interface ShortMessageService {
 	
 	public Page<ShortMessage> getByCondition();
 	
+	public Response checkEditDate(ShortMessage message);
+	
 	
 }
