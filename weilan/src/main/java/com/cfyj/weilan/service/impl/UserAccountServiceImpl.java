@@ -13,7 +13,7 @@ public class UserAccountServiceImpl extends LogServiceImpl implements UserAccoun
 
 	@Override
 	public String checkPasswd(User account) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
