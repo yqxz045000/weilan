@@ -57,7 +57,8 @@ public class UserInfoServiceImpl extends LogServiceImpl implements UserInfoServi
 
 	@Override
 	public Response editUserInfo(User user) {
-		// TODO Auto-generated method stub
+			
+		
 		return null;
 	}
 
@@ -66,6 +67,12 @@ public class UserInfoServiceImpl extends LogServiceImpl implements UserInfoServi
 		User user = userInfoDao.getById(userId);
 		
 		return user;
+	}
+
+	@Override
+	public Response checkEditData(User user, String type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

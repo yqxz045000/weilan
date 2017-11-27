@@ -10,5 +10,10 @@ public interface UserInfoService {
 	public Response editUserInfo(User user);
 	
 	public User getById(int userId);
+	
+	public Response checkEditData(User user,String type);
+	
+	
+	
 
 }
