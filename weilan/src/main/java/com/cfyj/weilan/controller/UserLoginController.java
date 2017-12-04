@@ -35,7 +35,6 @@ public class UserLoginController {
 		}
 		
 		return res;
-		
 	}
 	
 	

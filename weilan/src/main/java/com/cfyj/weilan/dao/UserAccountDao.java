@@ -1,9 +1,11 @@
 package com.cfyj.weilan.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.cfyj.weilan.entity.User;
 
+@Mapper
 public interface UserAccountDao {
 
 	public int insertUserAccount(User user);
