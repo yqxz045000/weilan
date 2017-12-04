@@ -15,14 +15,11 @@ public class ShortMessage extends BaseEntity{
 
 	private Integer id;				
 	private Integer userId;			//用户id
-	private String type;			//字典项 类型
+	private String type;			//字典项 类型,分为M和E
 	private Integer categoryId;		//分类id
 	private String content;			//用户发表的内容
 	private Integer eId;			// 文章的id 
 	private String status; 			//字典项   状态
-	
-	
-	
 	
 	public Integer getId() {
 		return id;

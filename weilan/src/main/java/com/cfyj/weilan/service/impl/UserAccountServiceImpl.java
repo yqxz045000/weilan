@@ -18,13 +18,13 @@ public class UserAccountServiceImpl extends LogServiceImpl implements UserAccoun
 
 
 	@Override
-	public Response addUserAccount(User account) {
+	public boolean addUserAccount(User account) {
 		try {
 			int i = userAccountDao.insertUserAccount(account);		
 			if(i>0) {
-				return new Response(CodeDict.SUCCESS);			
+				return true;			
 			}else {
-				return new Response(CodeDict.FAIL);	
+				return false;	
 			}
 		} catch (Exception e) {
 			log.error("UserAccountServiceImpl-addUserAccount：创建帐号异常",e);

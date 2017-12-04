@@ -1,11 +1,14 @@
 package com.cfyj.weilan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cfyj.weilan.dao.ShortMessageDao;
 import com.cfyj.weilan.domain.CodeDict;
 import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.Response;
+import com.cfyj.weilan.domain.query.ShortMessageQuery;
 import com.cfyj.weilan.entity.ShortMessage;
 import com.cfyj.weilan.service.ShortMessageService;
 
@@ -44,9 +47,16 @@ public class ShortMessageServiceImpl extends LogServiceImpl  implements ShortMes
 	}
 
 	@Override
-	public Page<ShortMessage> getByCondition() {
-	
-		return null;
+	public Page<ShortMessage> getByCondition(ShortMessageQuery query) {
+		Page<ShortMessage> page = new Page<ShortMessage>();
+		int num = shortMessageDao.findCountByCondition(query);
+		List<ShortMessage> list = shortMessageDao.findByCondition(query);
+		page.setResult(list);
+		page.setPageNo(query.getPageNo());	
+		page.setPageSize(query.getPageSize());
+		page.setTotalRecord(num);
+		
+		return page;
 	}
 	
 	/**

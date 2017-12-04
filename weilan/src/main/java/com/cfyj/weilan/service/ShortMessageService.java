@@ -2,6 +2,7 @@ package com.cfyj.weilan.service;
 
 import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.Response;
+import com.cfyj.weilan.domain.query.ShortMessageQuery;
 import com.cfyj.weilan.entity.ShortMessage;
 
 /**
@@ -22,7 +23,7 @@ public interface ShortMessageService {
 	
 	public ShortMessage getById(int id,int userId);
 	
-	public Page<ShortMessage> getByCondition();
+	public Page<ShortMessage> getByCondition(ShortMessageQuery query);
 	
 	public Response checkEditDate(ShortMessage message);
 	
