@@ -6,9 +6,10 @@ import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.entity.LongMessage;
 import com.cfyj.weilan.service.LongMessageService;
+import com.cfyj.weilan.utils.BaseLogUtil;
 
 @Service
-public class LongMessageServiceImpl extends LogServiceImpl  implements LongMessageService {
+public class LongMessageServiceImpl extends BaseLogUtil  implements LongMessageService {
 
 	@Override
 	public Response addLongMessage(LongMessage message) {

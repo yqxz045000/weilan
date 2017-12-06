@@ -12,10 +12,11 @@ import com.cfyj.weilan.domain.UserInfo;
 import com.cfyj.weilan.entity.User;
 import com.cfyj.weilan.service.UserAccountService;
 import com.cfyj.weilan.service.UserInfoService;
+import com.cfyj.weilan.utils.BaseLogUtil;
 import com.cfyj.weilan.utils.MD5Util;
 
 @Service
-public class UserInfoServiceImpl extends LogServiceImpl implements UserInfoService {
+public class UserInfoServiceImpl extends BaseLogUtil implements UserInfoService {
 
 	@Autowired
 	private UserInfoDao  userInfoDao;

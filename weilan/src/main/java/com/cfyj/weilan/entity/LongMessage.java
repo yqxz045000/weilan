@@ -11,7 +11,7 @@ public class LongMessage extends BaseEntity{
 	
 	private static final long serialVersionUID = 7974845329487707590L;
 	private Integer id	; 
-	private Integer UserId;				//	用户id
+	private Integer userId;				//	用户id
 	private Integer categoryId; 		//	类型id
 	private String title; 				//	标题
 	private String content;				//	内容
@@ -24,11 +24,12 @@ public class LongMessage extends BaseEntity{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public Integer getUserId() {
-		return UserId;
+		return userId;
 	}
 	public void setUserId(Integer userId) {
-		UserId = userId;
+		this.userId = userId;
 	}
 	public Integer getCategoryId() {
 		return categoryId;

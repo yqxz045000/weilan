@@ -11,8 +11,9 @@ import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.domain.query.ShortMessageQuery;
 import com.cfyj.weilan.entity.ShortMessage;
 import com.cfyj.weilan.service.ShortMessageService;
+import com.cfyj.weilan.utils.BaseLogUtil;
 
-public class ShortMessageServiceImpl extends LogServiceImpl  implements ShortMessageService {
+public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessageService {
 	
 	@Autowired
 	private  ShortMessageDao shortMessageDao;

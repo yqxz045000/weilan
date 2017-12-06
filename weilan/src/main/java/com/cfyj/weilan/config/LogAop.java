@@ -12,7 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.cfyj.weilan.service.impl.LogServiceImpl;
+import com.cfyj.weilan.utils.BaseLogUtil;
 
 /**
  * 
@@ -23,7 +23,7 @@ import com.cfyj.weilan.service.impl.LogServiceImpl;
 @Aspect
 @Order(1)
 @Component
-public class LogAop extends LogServiceImpl {
+public class LogAop extends BaseLogUtil {
 
 	@Pointcut("execution(* com..controller.*.*(..))")
 	public void controllerAop() {

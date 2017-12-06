@@ -8,9 +8,9 @@ public class UserConstant {
 	public static final int USERLEVEL_3 = 3;
 	
 	/*****************state****************************/
-	public static final String USERSTATUS_normal = "1";		//正常
-	public static final String USERSTATUS_freeze = "2";		//冻结
-	public static final String USERSTATUS_ABNORMAL = "10";	//异常
+//	public static final String USERSTATUS_normal = "1";		//正常
+//	public static final String USERSTATUS_freeze = "2";		//冻结
+//	public static final String USERSTATUS_ABNORMAL = "10";	//异常
 	
 	/*********************************************/
 	

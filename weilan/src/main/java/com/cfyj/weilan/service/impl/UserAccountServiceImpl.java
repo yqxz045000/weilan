@@ -9,9 +9,10 @@ import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.domain.UserView;
 import com.cfyj.weilan.entity.User;
 import com.cfyj.weilan.service.UserAccountService;
+import com.cfyj.weilan.utils.BaseLogUtil;
 import com.cfyj.weilan.utils.MD5Util;
 
-public class UserAccountServiceImpl extends LogServiceImpl implements UserAccountService {
+public class UserAccountServiceImpl extends BaseLogUtil implements UserAccountService {
 	
 	@Autowired
 	private UserAccountDao userAccountDao;
