@@ -19,7 +19,7 @@ public interface CategoryService {
 	 * 获取所有分类，包含系统的和用户自身的
 	 * @return
 	 */
-	public List<Category> getAll();
+	public List<Category> getAll(int userId);
 	
 	
 	

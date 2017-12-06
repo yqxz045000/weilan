@@ -70,6 +70,16 @@ public class Page<T> extends BaseDomain{
 	public void setResult(List<T> result) {
 		this.result = result;
 	}
-
+	
+	public int getBegin() {
+		if(this.pageNo==null) {
+			this.pageNo = 1;
+		}
+		return (this.pageNo-1)*(this.pageSize);
+	}
+	
+	public int getEnd() {
+		return this.pageSize;
+	}
 
 }

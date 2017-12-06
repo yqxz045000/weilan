@@ -28,6 +28,7 @@ public class CategoryController {
 	public  Response add(Category category) {
 		Response res ;
 		if(StringUtils.isNoneBlank(category.getName())) {
+			category.setUserId(userId);
 			res = categoryService.addCategory(category);
 		}else {
 			res = new Response(CodeDict.FAIL);
@@ -41,6 +42,7 @@ public class CategoryController {
 	public  Response edit(Category category) {
 		Response res ;
 		if(category!=null &&  StringUtils.isNoneBlank(category.getName()) && userId>0) {
+			category.setUserId(userId);
 			res = categoryService.editCategory(category);
 		}else {
 			res = new Response(CodeDict.FAIL);
@@ -76,7 +78,7 @@ public class CategoryController {
 	@PostMapping("getAll")
 	public CommonRes<List<Category>> getAll(){
 		CommonRes<List<Category>> res  = new CommonRes<List<Category>> (CodeDict.SUCCESS);
-		List<Category> all = categoryService.getAll();
+		List<Category> all = categoryService.getAll(userId);
 		res.setData(all);
 		return  res;
 	}

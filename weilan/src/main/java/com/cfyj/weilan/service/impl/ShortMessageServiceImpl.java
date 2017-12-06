@@ -2,8 +2,11 @@ package com.cfyj.weilan.service.impl;
 
 import java.util.List;
 
+import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.cfyj.weilan.constant.MessageConstant;
 import com.cfyj.weilan.dao.ShortMessageDao;
 import com.cfyj.weilan.domain.CodeDict;
 import com.cfyj.weilan.domain.Page;
@@ -13,6 +16,7 @@ import com.cfyj.weilan.entity.ShortMessage;
 import com.cfyj.weilan.service.ShortMessageService;
 import com.cfyj.weilan.utils.BaseLogUtil;
 
+@Service
 public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessageService {
 	
 	@Autowired
@@ -21,6 +25,9 @@ public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessag
 	@Override
 	public Response addShortMessage(ShortMessage message) {
 		Response res ; 
+		
+		message.setContent(ESAPI.encoder().encodeForHTML(message.getContent()));
+		message.setType(MessageConstant.MESSAGE_TYPE_MEMORY);	
 		int result = shortMessageDao.insertShortMessage(message);
 		if(result >0) {
 			res = new Response(CodeDict.SUCCESS);
@@ -29,7 +36,18 @@ public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessag
 		}	
 		return res;
 	}
-
+	
+	@Override
+	public boolean addShortMessageByE(ShortMessage message) {
+		message.setType(MessageConstant.MESSAGE_TYPE_ESSAY);
+		int result = shortMessageDao.insertShortMessage(message);
+		if(result >0) {
+			return true;
+		}else {
+			return false;
+		}	
+	}
+	
 	@Override
 	public Response deleteById(int id, int userId) {
 		Response res ; 
@@ -48,7 +66,7 @@ public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessag
 	}
 
 	@Override
-	public Page<ShortMessage> getByCondition(ShortMessageQuery query) {
+	public Page<ShortMessage> getByPage(ShortMessageQuery query) {
 		Page<ShortMessage> page = new Page<ShortMessage>();
 		int num = shortMessageDao.findCountByCondition(query);
 		List<ShortMessage> list = shortMessageDao.findByCondition(query);
@@ -60,13 +78,4 @@ public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessag
 		return page;
 	}
 	
-	/**
-	 * check insert or update data usability
-	 */
-	@Override
-	public Response checkEditDate(ShortMessage message) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

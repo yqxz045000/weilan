@@ -82,8 +82,8 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 	 * 系统分类和用户分类进行联查
 	 */
 	@Override
-	public List<Category> getAll() {
-		return  categoryDao.findAllByUserId();		
+	public List<Category> getAll(int userId) {
+		return  categoryDao.findAllByUserId(userId);		
 	}
 
 }

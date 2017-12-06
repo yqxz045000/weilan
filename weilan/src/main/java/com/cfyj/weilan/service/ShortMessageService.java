@@ -19,13 +19,21 @@ public interface ShortMessageService {
 	
 	public  Response addShortMessage(ShortMessage message);
 	
+	//增长长文类型
+	public boolean addShortMessageByE(ShortMessage message);
+	
 	public Response deleteById(int id,int userId);
 	
 	public ShortMessage getById(int id,int userId);
 	
-	public Page<ShortMessage> getByCondition(ShortMessageQuery query);
+	/**
+	 * 上一层对数据自己做check，这一层只保存
+	 * @param query
+	 * @return
+	 */
+	public Page<ShortMessage> getByPage(ShortMessageQuery query);
 	
-	public Response checkEditDate(ShortMessage message);
+//	public Response checkEditDate(ShortMessage message);
 	
 	
 }

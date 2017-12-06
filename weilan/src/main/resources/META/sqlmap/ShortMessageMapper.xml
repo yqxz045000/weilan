@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfyj.weilan.dao.ShortMessageDao">
+	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.ShortMessage">
+		<id column="id"  property="id"/>
+		<result column="userId" property="userId"  />
+		<result column="type" property="type"  />
+		<result column="categoryId" property="categoryId"  />
+		<result column="essayId" property="essayId"  />
+		<result column="content" property="content"  />
+		<result column="status" property="status"/> 
+		<result column="createTime" property="createTime"  />
+		<result column="modifyTime" property="modifyTime"  />
+
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,userId,type,categoryId,content,createTime
+	</sql>
+	
+	<insert id="insertShortMessage" parameterType="com.cfyj.weilan.entity.ShortMessage">
+		insert into tb_shortMessage(userId,type,categoryId,essayId,content)  values(#{userId},#{type},#{categoryId},#{essayId},#{content})
+	</insert>
+	
+	<select id="findById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from tb_shortMessage
+		where userId = #{userId}  and id = #{id} and status = '1'
+	</select>
+	
+	<delete id="deleteById">
+		delete from tb_shortMessage where userId = #{userId}  and id = #{id} and status = '1'
+	</delete>
+	
+	<select id="findByCondition" resultMap="BaseResultMap" parameterType="com.cfyj.weilan.domain.query.ShortMessageQuery">
+		select <include refid="Base_Column_List" /> from tb_shortMessage
+		<where>
+			userId = #{userId} and status = '1'
+			<if test="type!=null and type!= '' ">
+			and type = #{type}
+			</if>
+			<if test="categoryId!=null">
+			and categoryId = #{categoryId}
+			</if>
+			<if test="beginTime!=null and beginTime!='' and endTime!=null and endTime!= ''">
+			and createTime between #{beginTime} and #{endTime})
+			</if>
+		</where>
+			limit #{begin},#{end}
+	</select>
+	
+	<select id="findCountByCondition" resultType="INTEGER"  parameterType="com.cfyj.weilan.domain.query.ShortMessageQuery">
+		select count(*) from tb_shortMessage
+		<where>
+			userId = #{userId} and status = '1'
+			<if test="type!=null and type!= '' ">
+			and type = #{type}
+			</if>
+			<if test="categoryId!=null">
+			and categoryId = #{categoryId}
+			</if>
+			<if test="beginTime!=null and beginTime!='' and endTime!=null and endTime!= ''">
+			and createTime between #{beginTime} and #{endTime})
+			</if>
+		</where>	
+	</select>
+	
+</mapper>
+
+
+
