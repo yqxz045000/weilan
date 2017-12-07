@@ -1,8 +1,10 @@
 package com.cfyj.weilan.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import com.cfyj.weilan.entity.BaseEntity;
+
+
 
 /**
  * 
@@ -13,15 +15,12 @@ import com.cfyj.weilan.entity.BaseEntity;
  */
 public class UserInfo  extends BaseEntity {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7703110009374913131L;
 	/**************** 个人信息 ****************************/
 	private Integer id; // 主键，程序生成
 	private String nickname; // 昵称
 	private String sex; // 性别
-	private Timestamp birthday; // 出生年月
+	private Date birthday; // 出生年月
 	private String headImg; // 头像
 	private String address; // 地址，暂不启用，留作扩展
 	
@@ -45,10 +44,10 @@ public class UserInfo  extends BaseEntity {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public Timestamp getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Timestamp birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 	public String getHeadImg() {

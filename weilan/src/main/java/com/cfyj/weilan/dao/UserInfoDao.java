@@ -1,11 +1,18 @@
 package com.cfyj.weilan.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.cfyj.weilan.domain.UserInfo;
 import com.cfyj.weilan.entity.User;
 
+@Mapper
 public interface UserInfoDao {
 
-	void insertUserInfo(User user);
+	int insertUserInfo(User user);
 	
-	User getById(int userId);
+	User getById(@Param("id") int id);
+
+	int updateUserInfo(UserInfo userInfo);
 
 }

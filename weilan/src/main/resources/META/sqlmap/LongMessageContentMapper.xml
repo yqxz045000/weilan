@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfyj.weilan.dao.LongMessageContentDao">
+	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.LongMessageContent">
+		<id column="id"  property="id"/>
+		<result column="content" property="content"  />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,content
+	</sql>
+	
+	<delete id="deleteById">
+		delete from tb_longMessageContent where id = #{id}
+	</delete>
+	
+	<insert id="insertLongMessageContent" parameterType="com.cfyj.weilan.entity.LongMessageContent" >
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into tb_longMessageContent(content) values(#{content})
+	</insert>
+	
+	<update id="updateLongMessageContent" parameterType="com.cfyj.weilan.entity.LongMessageContent">
+		updaet tb_longMessageContent set content = #{content} where id = #{id}	
+	</update>
+	
+</mapper>
+
+
+

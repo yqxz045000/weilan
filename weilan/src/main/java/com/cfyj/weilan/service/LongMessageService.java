@@ -8,10 +8,12 @@ public interface LongMessageService {
 
 	public  Response addLongMessage(LongMessage message);
 	
+	public  Response editLongMessage(LongMessage message);
+	
 	public Response deleteById(int id,int userId);
 	
 	public LongMessage getById(int id,int userId);
 	
-	public Page<LongMessage> getByCondition(); 
+	public Page<LongMessage> getByCondition(Page<LongMessage> page ,int userId); 
 	
 }

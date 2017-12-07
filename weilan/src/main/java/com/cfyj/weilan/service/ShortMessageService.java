@@ -2,6 +2,7 @@ package com.cfyj.weilan.service;
 
 import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.Response;
+import com.cfyj.weilan.domain.query.ShortMessageQuery;
 import com.cfyj.weilan.entity.ShortMessage;
 
 /**
@@ -18,13 +19,21 @@ public interface ShortMessageService {
 	
 	public  Response addShortMessage(ShortMessage message);
 	
+	//增长长文类型
+	public boolean addShortMessageByE(ShortMessage message);
+	
 	public Response deleteById(int id,int userId);
 	
 	public ShortMessage getById(int id,int userId);
 	
-	public Page<ShortMessage> getByCondition();
+	/**
+	 * 上一层对数据自己做check，这一层只保存
+	 * @param query
+	 * @return
+	 */
+	public Page<ShortMessage> getByPage(ShortMessageQuery query);
 	
-	public Response checkEditDate(ShortMessage message);
+//	public Response checkEditDate(ShortMessage message);
 	
 	
 }

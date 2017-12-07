@@ -3,7 +3,7 @@ package com.cfyj.weilan.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -12,7 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.cfyj.weilan.service.impl.LogServiceImpl;
+import com.cfyj.weilan.utils.BaseLogUtil;
 
 /**
  * 
@@ -21,9 +21,9 @@ import com.cfyj.weilan.service.impl.LogServiceImpl;
  *
  */
 @Aspect
-@Order(1)
+@Order(5)
 @Component
-public class LogAop extends LogServiceImpl {
+public class LogAop extends BaseLogUtil {
 
 	@Pointcut("execution(* com..controller.*.*(..))")
 	public void controllerAop() {
@@ -31,9 +31,9 @@ public class LogAop extends LogServiceImpl {
 	}
 
 	@Before(value = "controllerAop()")
-	public void beforeRun(ProceedingJoinPoint joinPoint) {
+	public void beforeRun(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
-		List<Object> list = new ArrayList();
+		List<Object> list = new ArrayList<Object>();
 		for (Object param : args) {
 			list.add(param);
 		}

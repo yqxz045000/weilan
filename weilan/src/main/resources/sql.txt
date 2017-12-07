@@ -1,0 +1,56 @@
+CREATE TABLE `tb_userinfo` (
+  `id` int(11) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
+  `sex` varchar(1) DEFAULT '0',
+  `birthday` date DEFAULT NULL,
+  `headImg` varchar(100) NOT NULL,
+  `address` varchar(50) DEFAULT '',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifyTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tb_useraccount` (
+  `id` int(11) NOT NULL,
+  `userAccount` varchar(20) NOT NULL,
+  `passwd` varchar(100) NOT NULL,
+  `oldPasswd` varchar(100) NOT NULL,
+  `type` varchar(5) DEFAULT '1',
+  `status` varchar(1) DEFAULT '1',
+  `level` varchar(2) DEFAULT '1',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifyTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

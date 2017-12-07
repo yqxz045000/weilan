@@ -1,4 +1,7 @@
 package com.cfyj.weilan.domain;
+
+import java.util.List;
+
 /**
  * 
  * @author cfyj
@@ -21,7 +24,7 @@ public class Page<T> extends BaseDomain{
 	
 	private Integer totalPage;		//总页数
 	
-	private T result;			//结果集
+	private List<T> result;			//结果集
 
 	public int getPageNo() {
 		return pageNo==null?0:pageNo;
@@ -60,14 +63,23 @@ public class Page<T> extends BaseDomain{
 		this.totalPage = totalPage;
 	}
 
-	public T getResult() {
+	public List<T> getResult() {
 		return result;
 	}
 
-	public void setResult(T result) {
+	public void setResult(List<T> result) {
 		this.result = result;
 	}
 	
+	public int getBegin() {
+		if(this.pageNo==null) {
+			this.pageNo = 1;
+		}
+		return (this.pageNo-1)*(this.pageSize);
+	}
 	
+	public int getEnd() {
+		return this.pageSize;
+	}
 
 }
