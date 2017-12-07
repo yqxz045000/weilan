@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfyj.weilan.dao.LongMessageDao">
+
+	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.LongMessage">
+		<id column="id"  property="id"/>
+		<result column="userId" property="userId"  />
+		<result column="categoryId" property="categoryId"  />
+		<result column="title" property="title"  />
+		<result column="contentId" property="contentId"  />
+		<result column="resume" property="resume"  />
+		<result column="bgImg" property="bgImg"  />
+		<result column="status" property="status"/>
+		<result column="createTime" property="createTime"  />
+		<result column="modifyTime" property="modifyTime"  />	
+	</resultMap>
+	
+		<resultMap id="ResultMap" type="com.cfyj.weilan.entity.LongMessage">
+		<id column="id"  property="id"/>
+		<result column="userId" property="userId"  />
+		<result column="categoryId" property="categoryId"  />
+		<result column="title" property="title"  />
+		<result column="contentId" property="contentId"  />
+		<result column="resume" property="resume"  />
+		<result column="bgImg" property="bgImg"  />
+		<result column="status" property="status"/>
+		<result column="createTime" property="createTime"  />
+		<result column="modifyTime" property="modifyTime"  />
+		<association property="content" select="selectContent" column="contentId" javaType="com.cfyj.weilan.entity.LongMessageContent"/>  
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,userId,categoryId,title,contentId,resume,bgImg
+	</sql>
+	
+	<select id="selectContent" parameterType="int" resultType="com.cfyj.weilan.entity.LongMessageContent">
+		 select * from tb_longMessageContent where id = #{contentId}  
+	</select>	
+		
+	<select id="getById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from tb_longMessage 
+		where userId = #{userId} and status = '1' and id = #{id}   
+	</select>
+	
+	<select id="getLongMessageById" resultMap="ResultMap">
+		select <include refid="Base_Column_List" /> from tb_longMessage 
+		where userId = #{userId} and status = '1' and id = #{id}  
+	</select>
+	
+	<delete id="deleteById">
+		delete from tb_longMessage where userId = #{userId} and status = '1' and id = #{id}  
+	</delete>
+		
+	<insert id="insertLongMessage" parameterType="com.cfyj.weilan.entity.LongMessage">
+		insert into tb_longMessage(userId,categoryId,title,contentId,resume,bgImg) values(#{userId},#{categoryId},#{title},#{contentId},#{resume},#{bgImg})	
+	</insert>
+	
+	<update id="updateLongMessage" parameterType="com.cfyj.weilan.entity.LongMessage">
+		update tb_longMessage 
+		<set>
+			<if test="categoryId!=null">
+			and	categoryId = #{categoryId}
+			</if>
+			<if test="title!=null and title!='' ">
+			and	title = #{title}
+			</if>
+			<if test="resume!=null and resume!='' ">
+				and	resume = #{resume}
+			</if>
+			<if test="bgImg!=null and bgImg!='' ">
+			and	bgImg = #{bgImg}
+			</if>
+		</set>
+		where userId = #{userId} and status = '1' and id = #{id}
+	</update>	
+
+</mapper>
+
+
+

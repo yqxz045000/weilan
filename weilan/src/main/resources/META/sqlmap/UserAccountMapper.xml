@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cfyj.weilan.dao.UserAccountDao">
+
 	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.User">
-		<result column="CNICKID" property="nickId" jdbcType="VARCHAR" />
-
+		<id column="id" property="id" />
+		<result column="nickname" property="nickname"  />
+		<result column="sex" property="sex"  />
+		<result column="birthday" property="birthday"  />
+		<result column="headImg" property="headImg"  />
+		<result column="address" property="address"  />
+		<!-- account -->
+		<result column="userAccount" property="userAccount"  />
+		<result column="passwd" property="passwd"  />
+		<result column="oldPasswd" property="oldPasswd"  />
+		<result column="type" property="type"  />
+		<result column="status" property="status"  />
+		<result column="level" property="level"  />
+		<result column="createTime" property="createTime"  />
+		<result column="modifyTime" property="modifyTime"  />
 	</resultMap>
-
+	
 	<sql id="Base_Column_List">
-		
+		id,userAccount,passwd,oldPasswd,type,status,level,createTime
 	</sql>
 	
+	<sql id="login_Column_List">
+		id,nickname,sex,birthday,headImg,address,userAccount,passwd,oldPasswd,type,status,level,createTime
+	</sql>
+	<sql id="noPass_Column_List">
+		id,userAccount,type,status,level,createTime
+	</sql>
 	
-	
-	
-	
-	
-	
-	
-	
+	<insert id="insertUserAccount" parameterType="com.cfyj.weilan.entity.User" >
+		insert into tb_userAccount(id,userAccount,passwd,oldPasswd)  
+		values(#{id},#{userAccount},#{passwd},#{oldPasswd})
+	</insert>
 
+	<select id="findByAccount" resultMap="BaseResultMap">
+		select a.id,i.nickname,i.sex,i.birthday,i.headImg,i.address,a.userAccount,a.passwd,a.oldPasswd,a.type,a.status,a.level,a.createTime
+		 from tb_userAccount a,tb_userInfo i where i.id = a.id and a.userAccount = #{userAccount} and status ='1'
+	</select>
+	
+	<select id="findByUserId" resultMap="BaseResultMap">
+		select <include refid="noPass_Column_List"/> from tb_userAccount where id = #{id} and status ='1'
+	</select>
+	
+	 <select id="findNumById" resultType="INTEGER">
+	 	select count(*) from tb_userAccount where id = #{id}
+	 </select>
+	 
 </mapper>
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cfyj.weilan.dao.CategoryDao;
 import com.cfyj.weilan.domain.CodeDict;
@@ -17,6 +18,7 @@ import com.cfyj.weilan.utils.BaseLogUtil;
  *2017年12月6日 下午2:22:08
  *上一层需要对传入下一层的数据做check
  */
+@Service
 public class CategoryServiceImpl extends BaseLogUtil implements CategoryService {
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 	@Override
 	public Response addCategory(Category category) {
 		Response res ; 
-		int categoryNum = categoryDao.findNumById(category.getId(),category.getUserId());
+		Integer categoryNum = categoryDao.findNumById(category.getUserId());
 		if(categoryNum>max_categoryNum) {
 			res = new Response(CodeDict.FAIL);
 			res.setMsg("增加失败：已到达最大数量");

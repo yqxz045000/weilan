@@ -9,7 +9,7 @@ package com.cfyj.weilan.entity;
  */
 public class ShortMessage extends BaseEntity{
 	
-	
+	//TODO 少图片的上传功能
 	
 	private static final long serialVersionUID = 5258540024400115762L;
 

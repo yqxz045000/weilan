@@ -20,6 +20,6 @@ public interface CategoryDao {
 
 	int updateCategory(Category category);
 
-	int findNumById(Integer id, Integer userId);
+	int findNumById(@Param("userId")int userId);
 
 }

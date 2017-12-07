@@ -1,5 +1,7 @@
 package com.cfyj.weilan.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cfyj.weilan.constant.UserConstant;
 import com.cfyj.weilan.domain.CodeDict;
+import com.cfyj.weilan.domain.CommonRes;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.domain.UserView;
 import com.cfyj.weilan.entity.User;
@@ -23,7 +26,7 @@ import com.cfyj.weilan.utils.BaseLogUtil;
  *
  */
 @RestController
-@RequestMapping
+@RequestMapping("userAccount")
 public class UserLoginController extends BaseLogUtil{
 
 	@Autowired
@@ -60,7 +63,18 @@ public class UserLoginController extends BaseLogUtil{
 	 */
 	@PostMapping("register")
 	public Response register(User user) {	
-		return null;
+		user = new User();
+		user.setAddress("上海市");
+		user.setBirthday(new Date());
+		user.setHeadImg("headImg");
+		user.setNickname("nickname");
+		user.setPasswd("passwd");
+		user.setSex("1");
+		user.setUserAccount("userAccount");
+	
+		CommonRes<User> res = userAccountService.addUserAccount(user);
+		
+		return res;
 	}
 	
 	

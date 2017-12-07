@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cfyj.weilan.dao.CategoryDao">
+	
 	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.Category">
 		<id column="id"  property="id"/>
 		<result column="userId" property="userId"  />
@@ -10,26 +11,29 @@
 		<!-- <result column="isDelete" property="isDelete"/> -->
 		<result column="createTime" property="createTime"  />
 		<result column="modifyTime" property="modifyTime"  />
-
 	</resultMap>
 	
 	<sql id="Base_Column_List">
 		id,name,description,createTime,modifyTime
 	</sql>
 	
-	<select id="findById" resultType="BaseResultMap" >
+	<select id="findById" resultMap="BaseResultMap" >
 		select <include refid="Base_Column_List"/> from tb_category
 		where  userId = #{userId} and id = #{id} and status = '1'
 	</select>
 	
-	<select id="findAllByUserId" resultType="BaseResultMap"  >
+	<select id="findAllByUserId" resultMap="BaseResultMap"  >
 		select c.id,c.name,c.description,c.createTime,c.modifyTime
 		from tb_category c,tb_systemCategory sc 
 		where c.userId = #{userId} and  c.status = '1'
 	</select>
 	
+	<select id="findNumById" resultType="INTEGER">
+		select count(*) from tb_category where  userId = #{userId} and  status = '1'
+	</select>
+	
 	<delete id="deleteById">
-		delete from tb_category where userId = #{userId} and id = #{id}
+		delete from tb_category where userId = #{userId} and id = #{id} and  status = '1'
 	</delete>
 	
 	<insert id="insertCategory">

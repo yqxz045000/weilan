@@ -3,7 +3,7 @@ package com.cfyj.weilan.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -21,7 +21,7 @@ import com.cfyj.weilan.utils.BaseLogUtil;
  *
  */
 @Aspect
-@Order(1)
+@Order(5)
 @Component
 public class LogAop extends BaseLogUtil {
 
@@ -31,9 +31,9 @@ public class LogAop extends BaseLogUtil {
 	}
 
 	@Before(value = "controllerAop()")
-	public void beforeRun(ProceedingJoinPoint joinPoint) {
+	public void beforeRun(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
-		List<Object> list = new ArrayList();
+		List<Object> list = new ArrayList<Object>();
 		for (Object param : args) {
 			list.add(param);
 		}

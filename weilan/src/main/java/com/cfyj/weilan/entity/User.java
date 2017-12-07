@@ -1,6 +1,7 @@
 package com.cfyj.weilan.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 
@@ -13,22 +14,22 @@ public class User extends BaseEntity {
 
 	/**************** 个人信息 ****************************/
 	private Integer id; // 主键，程序生成
-	private String nickname; // 昵称
+	private String nickname; // 昵称 //可重复
 	private String sex; // 性别
-	private Timestamp birthday; // 出生年月
+	private Date birthday; // 出生年月
 	private String headImg; // 头像
 	private String address; // 地址，暂不启用，留作扩展
 
 	/********************* 账户信息 **************************************/
-	private String userAccount; // 帐号
+	private String userAccount; // 帐号 不可重复
 	private String passwd; // 密码
 	private String oldPasswd; // 旧密码
-
-	/************************ 系统属性 *******************************/
-
+	
 	private String type; // 类型，暂不启用，留作扩展
 	private String status; // 状态：正常、冻结、
 	private Integer level; // 级别
+
+
 
 	public String getUserAccount() {
 		return userAccount;
@@ -86,11 +87,11 @@ public class User extends BaseEntity {
 		this.sex = sex;
 	}
 
-	public Timestamp getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Timestamp birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 

@@ -7,4 +7,13 @@
 
 3.对动态的内容做缓存加动态读取
 
+4.返回插入的id
+<selectKey keyProperty="addressId" order="AFTER" resultType="Integer">
+		SELECT LAST_INSERT_ID() AS addressId
+</selectKey>
+
+5.Java连接Mysql数据库警告：Establishing SSL connection without server's identity verification is not recommend
+原因是MySQL在高版本需要指明是否进行SSL连接。解决方案如下：
+在mysql连接字符串url中加入ssl=true或者false即可，如下所示。
+url=jdbc:mysql://127.0.0.1:3306/framework?characterEncoding=utf8&useSSL=true
 
