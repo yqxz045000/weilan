@@ -8,10 +8,12 @@ import com.cfyj.weilan.entity.LongMessageContent;
 @Mapper
 public interface LongMessageContentDao {
 
-	int deleteById(@Param("id") int id);
+	public int deleteById(@Param("id") int id);
 
-	int insertLongMessageContent(LongMessageContent content);
+	public int insertLongMessageContent(LongMessageContent content);
 
-	int updateLongMessageContent(LongMessageContent content);
+	public int updateLongMessageContent(LongMessageContent content);
+
+	public int findLastUpdateId(Integer userId);
 
 }

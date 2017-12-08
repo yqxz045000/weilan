@@ -23,9 +23,14 @@ public class UserInfo  extends BaseEntity {
 	private Date birthday; // 出生年月
 	private String headImg; // 头像
 	private String address; // 地址，暂不启用，留作扩展
+	private String phone;//手机号
 	
-	
-	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public Integer getId() {
 		return id;
 	}

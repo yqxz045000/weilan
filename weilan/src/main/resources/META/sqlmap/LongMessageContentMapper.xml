@@ -3,7 +3,9 @@
 <mapper namespace="com.cfyj.weilan.dao.LongMessageContentDao">
 	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.LongMessageContent">
 		<id column="id"  property="id"/>
+		<result column="userId" property="userId"  />
 		<result column="content" property="content"  />
+		<result column="modifyTime" property="modifyTime"  />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
@@ -15,14 +17,19 @@
 	</delete>
 	
 	<insert id="insertLongMessageContent" parameterType="com.cfyj.weilan.entity.LongMessageContent" >
+		insert into tb_longMessageContent(content,userId) values(#{content},#{userId})
 		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
 			SELECT LAST_INSERT_ID() AS id
-		</selectKey>
-		insert into tb_longMessageContent(content) values(#{content})
+		</selectKey> 
 	</insert>
 	
+	<!-- 获取刚插入的id -->
+	<select id="findLastUpdateId" resultType="INTEGER">
+		select id from tb_longMessageContent where userId = #{userId} order by modifyTime desc limit 0,1
+	</select>
+	
 	<update id="updateLongMessageContent" parameterType="com.cfyj.weilan.entity.LongMessageContent">
-		updaet tb_longMessageContent set content = #{content} where id = #{id}	
+		update tb_longMessageContent set content = #{content} where id = #{id}	
 	</update>
 	
 </mapper>

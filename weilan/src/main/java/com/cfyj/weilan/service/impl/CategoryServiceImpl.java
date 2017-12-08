@@ -54,7 +54,7 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 		Category dbCategory = categoryDao.findById(category.getId(), category.getUserId());
 		String name = ESAPI.encoder().encodeForHTML(category.getName() );
 		String des =  ESAPI.encoder().encodeForHTML(category.getDescription());
-		if(dbCategory==null || !dbCategory.getName().equals(name)) {
+		if(dbCategory!=null && dbCategory.getName().equals(name)) {
 			res = new Response(CodeDict.FAIL);
 			res.setMsg("分类名称已存在");
 			return res;

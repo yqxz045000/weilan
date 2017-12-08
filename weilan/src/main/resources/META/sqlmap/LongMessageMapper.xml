@@ -15,7 +15,7 @@
 		<result column="modifyTime" property="modifyTime"  />	
 	</resultMap>
 	
-		<resultMap id="ResultMap" type="com.cfyj.weilan.entity.LongMessage">
+	<resultMap id="ResultMap" type="com.cfyj.weilan.entity.LongMessage">
 		<id column="id"  property="id"/>
 		<result column="userId" property="userId"  />
 		<result column="categoryId" property="categoryId"  />
@@ -30,7 +30,7 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id,userId,categoryId,title,contentId,resume,bgImg
+		id,userId,categoryId,title,contentId,resume,bgImg,createTime,modifyTime
 	</sql>
 	
 	<select id="selectContent" parameterType="int" resultType="com.cfyj.weilan.entity.LongMessageContent">
@@ -52,23 +52,27 @@
 	</delete>
 		
 	<insert id="insertLongMessage" parameterType="com.cfyj.weilan.entity.LongMessage">
-		insert into tb_longMessage(userId,categoryId,title,contentId,resume,bgImg) values(#{userId},#{categoryId},#{title},#{contentId},#{resume},#{bgImg})	
+		insert into tb_longMessage(userId,categoryId,title,contentId,resume,bgImg) values(#{userId},#{categoryId},#{title},#{contentId},#{resume},#{bgImg}) 
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey> 
+		
 	</insert>
 	
 	<update id="updateLongMessage" parameterType="com.cfyj.weilan.entity.LongMessage">
 		update tb_longMessage 
 		<set>
 			<if test="categoryId!=null">
-			and	categoryId = #{categoryId}
+				categoryId = #{categoryId},
 			</if>
 			<if test="title!=null and title!='' ">
-			and	title = #{title}
+				title = #{title},
 			</if>
 			<if test="resume!=null and resume!='' ">
-				and	resume = #{resume}
+				resume = #{resume},
 			</if>
 			<if test="bgImg!=null and bgImg!='' ">
-			and	bgImg = #{bgImg}
+				bgImg = #{bgImg}
 			</if>
 		</set>
 		where userId = #{userId} and status = '1' and id = #{id}

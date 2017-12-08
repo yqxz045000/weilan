@@ -60,6 +60,7 @@ public class ShortMessageController {
 		return res;
 	}
 	
+	@PostMapping("query")
 	public CommonRes<Page<ShortMessage>> getByPage(ShortMessageQuery query){
 		query.setUserId(userId);
 		CommonRes<Page<ShortMessage>> res = new  CommonRes<Page<ShortMessage>>(CodeDict.SUCCESS);

@@ -14,7 +14,7 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id,name,description,createTime,modifyTime
+		id,userId,name,description,createTime,modifyTime
 	</sql>
 	
 	<select id="findById" resultMap="BaseResultMap" >
@@ -24,7 +24,7 @@
 	
 	<select id="findAllByUserId" resultMap="BaseResultMap"  >
 		select c.id,c.name,c.description,c.createTime,c.modifyTime
-		from tb_category c,tb_systemCategory sc 
+		from tb_category c
 		where c.userId = #{userId} and  c.status = '1'
 	</select>
 	
@@ -37,11 +37,18 @@
 	</delete>
 	
 	<insert id="insertCategory">
-		insert into tb_category(name,description) values(#{name},#{description})
+		insert into tb_category(userId,name,description) values(#{userId},#{name},#{description})
 	</insert>
 	
 	<update id="updateCategory">
-		update tb_category set description =  #{description },name = #{name} where userId = #{userId} and id = #{id} and status = '1'
+		update tb_category 
+		<set>
+			name = #{name},
+			<if test="description!=null">
+				description =  #{description }
+			</if>
+		</set>
+		where userId = #{userId} and id = #{id} and status = '1'
 	</update>
 	
 
