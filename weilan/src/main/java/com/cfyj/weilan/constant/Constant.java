@@ -9,17 +9,20 @@ package com.cfyj.weilan.constant;
 public class Constant {
 	
 	/**********************status******************************/
-	public static final String STATUS_NORMAL = "1"; //正常
+	public static final String STATUS_NORMAL = "1"; //正常   ----已处理（对应回复类状态）
 	
-	public static final String STATUS_ABNORMAL = "10"; //异常
+	public static final String STATUS_ABNORMAL = "10"; //异常 ---- 未处理（对应回复类状态）
 	
-	public static final String STATUS_FREEZE = "0"; //冻结
+	public static final String STATUS_FREEZE = "0"; //冻结  ---  异常（对应回复类状态）
 	
 	/*************************isDelete*********************************/
 	
 	public static final String DELETE_TRUE = "1";// 标记删除
 	
 	public static final String DELETE_FALSE = "1";// 标记不删除
+	
+	
+
 	
 	
 

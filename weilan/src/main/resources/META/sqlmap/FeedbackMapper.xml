@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfyj.weilan.dao.FeedbackDao">
+	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.Feedback">
+		<id column="id"  property="id"/>
+		<result column="userId" property="userId"  />
+		<result column="msg" property="msg"  />
+		<result column="replyMsg" property="replyMsg"/> 
+		<result column="type" property="type"  />
+		<result column="status" property="status"/> 
+		<result column="createTime" property="createTime"  />
+		<result column="modifyTime" property="modifyTime"  />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,userId,msg,replyMsg,type,status,createTime,modifyTime
+	</sql>
+	
+	<select id="findById"  resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from tb_feedback where id = #{id}
+	</select>
+	
+	<select id="findLastFeedbackByUserId" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from tb_feedback where  status!='10' and userId = #{userId} order by createTime desc limit 0,1
+	</select>
+	
+	<select id="findByUserIdAndStatus" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from tb_feedback where status = #{status} and userId = #{userId} 
+	</select>
+	
+	<update id="updateFeedback" parameterType="com.cfyj.weilan.entity.Feedback">
+		update tb_feedback set replyMsg = #{replyMsg} ,status = #{status} where   userId = #{userId} and id = #{id}
+	</update>
+	
+	<insert id="insertFeedback" parameterType="com.cfyj.weilan.entity.Feedback">
+		insert into tb_feedback(userId,msg,type) values(#{userId},#{msg},#{type}) 
+	</insert>
+	
+</mapper>
+
+
+

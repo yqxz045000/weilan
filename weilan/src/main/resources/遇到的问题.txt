@@ -2,6 +2,7 @@
 	xxs攻击是用户提交的内容中右js代码，而在取出该内容在页面显示时，该代码片段会执行，从而使用户的信息泄漏或服务器被攻击（拿到用户的sessionID来伪造登录）
 	解决：
 	1.使用ESAPI处理sql注入和xss攻击
+		ESAPI.encoder().encodeForHTML(message.getTitle())
 	
 2.增加敏感词汇过滤	
 
