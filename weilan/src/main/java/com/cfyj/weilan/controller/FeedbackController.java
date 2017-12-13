@@ -33,7 +33,7 @@ public class FeedbackController {
 		return res;	
 	}
 	
-	@PostMapping("addFeedback")
+	@PostMapping("getUserFeedback")
 	public CommonRes<Feedback> getUserFeedback() {
 		CommonRes<Feedback> res  = new CommonRes<Feedback>(CodeDict.SUCCESS);
 		Feedback Feedback =  feedBackService.getUserFeedback(userId);
