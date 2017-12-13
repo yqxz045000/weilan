@@ -5,7 +5,7 @@ import java.util.List;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.entity.Feedback;
 
-public interface FeedBackService {
+public interface FeedbackService {
 
 	public Response addFeedback(Feedback back);
 	

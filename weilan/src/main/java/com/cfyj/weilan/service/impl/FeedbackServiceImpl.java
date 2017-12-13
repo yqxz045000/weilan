@@ -11,10 +11,10 @@ import com.cfyj.weilan.dao.FeedbackDao;
 import com.cfyj.weilan.domain.CodeDict;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.entity.Feedback;
-import com.cfyj.weilan.service.FeedBackService;
+import com.cfyj.weilan.service.FeedbackService;
 
 @Service
-public class FeedBackServiceImpl implements FeedBackService {
+public class FeedbackServiceImpl implements FeedbackService {
 	
 	@Autowired
 	private FeedbackDao feedbackDao;
