@@ -19,6 +19,7 @@ public class User extends BaseEntity {
 	private Date birthday; // 出生年月
 	private String headImg; // 头像
 	private String address; // 地址，暂不启用，留作扩展
+	private String phone;//手机号
 
 	/********************* 账户信息 **************************************/
 	private String userAccount; // 帐号 不可重复
@@ -29,7 +30,13 @@ public class User extends BaseEntity {
 	private String status; // 状态：正常、冻结、
 	private Integer level; // 级别
 
+	public String getPhone() {
+		return phone;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public String getUserAccount() {
 		return userAccount;

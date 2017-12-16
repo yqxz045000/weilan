@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,userId,type,categoryId,content,createTime
+		id,userId,type,categoryId,content,createTime,modifyTime
 	</sql>
 	
 	<insert id="insertShortMessage" parameterType="com.cfyj.weilan.entity.ShortMessage">

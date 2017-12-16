@@ -13,6 +13,16 @@ public class LongMessageContent extends BaseEntity{
 	private Integer id;
 	
 	private String content;
+	
+	private Integer userId;
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 	public Integer getId() {
 		return id;

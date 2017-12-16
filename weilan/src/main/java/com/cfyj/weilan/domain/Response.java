@@ -29,6 +29,13 @@ public class Response extends BaseDomain{
 		this.setCode(codeDict.getCode());
 		this.setMsg(codeDict.getDesc());
 	}
+	
+	public Response(CodeDict codeDict,String msg) {
+		this.setCode(codeDict.getCode());
+		this.setMsg(msg);
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Response [code=" + code + ", msg=" + msg + "]";

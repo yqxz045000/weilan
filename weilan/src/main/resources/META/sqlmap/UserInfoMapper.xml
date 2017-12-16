@@ -9,6 +9,7 @@
 		<result column="birthday" property="birthday"  />
 		<result column="headImg" property="headImg"  />
 		<result column="address" property="address"  />
+		<result column="phone" property="phone"  />
 		<!-- account -->
 		<result column="userAccount" property="userAccount"  />
 		<result column="passwd" property="passwd"  />
@@ -21,7 +22,7 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id,nickname,sex,birthday,headImg,address,createTime,modifyTime
+		id,nickname,sex,birthday,headImg,address,phone,createTime,modifyTime
 	</sql>
 	
 	<update id="updateUserInfo">

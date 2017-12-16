@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfyj.weilan.dao.AnnoyanceWallDao">
+	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.AnnoyanceWall">
+		<id column="id"  property="id"/>
+		<result column="userId" property="userId"  />
+		<result column="msg" property="msg"  />
+		<result column="nickName" property="nickName"/> 
+		<result column="ip" property="ip"  />
+		<result column="type" property="type"  />
+		<result column="status" property="status"/> 
+		<result column="createTime" property="createTime"  />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,msg,nickName,type,createTime
+	</sql>
+	
+	<sql id="Column_List">
+		id,userId,msg,nickName,ip,type,status,createTime
+	</sql>
+	
+	<select id="findByCondition" parameterType="com.cfyj.weilan.domain.query.AnnoyanceWallQuery" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from tb_annoyanceWall 
+		<where>
+			<if test="type!=null and type!=''">
+			and type = #{type}
+			</if>
+		</where> 
+		order by createTime desc limit #{begin},#{end}
+		
+	</select>
+	
+	<insert id="insertAnnoyanceWall" parameterType="com.cfyj.weilan.entity.AnnoyanceWall">
+		insert into tb_annoyanceWall(userId,msg,nickName,ip,type) values(#{userId},#{msg},#{nickName},#{ip},#{type}) 
+	</insert>
+	
+	
+	
+</mapper>
+
+
+

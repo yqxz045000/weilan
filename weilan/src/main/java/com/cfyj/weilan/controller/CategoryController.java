@@ -37,7 +37,6 @@ public class CategoryController {
 		return res;
 	}
 	
-	
 	@PostMapping("edit")
 	public  Response edit(Category category) {
 		Response res ;
@@ -75,8 +74,8 @@ public class CategoryController {
 		return  res;
 	}
 	
-	@PostMapping("getAll")
-	public CommonRes<List<Category>> getAll(){
+	@PostMapping("query")
+	public CommonRes<List<Category>> query(){
 		CommonRes<List<Category>> res  = new CommonRes<List<Category>> (CodeDict.SUCCESS);
 		List<Category> all = categoryService.getAll(userId);
 		res.setData(all);

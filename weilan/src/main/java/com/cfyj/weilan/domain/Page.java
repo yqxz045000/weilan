@@ -20,9 +20,9 @@ public class Page<T> extends BaseDomain{
 	
 	private Integer pageSize=10;		//页大小
 	
-	private Integer totalRecord;	//总记录数
+	private Integer totalRecord=0;	//总记录数
 	
-	private Integer totalPage;		//总页数
+	private Integer totalPage=1;		//总页数
 	
 	private List<T> result;			//结果集
 
@@ -51,6 +51,9 @@ public class Page<T> extends BaseDomain{
 	}
 
 	public int getTotalPage() {
+		if(totalRecord==null || totalRecord==0) {
+			return 0;
+		}
 		if(totalRecord%pageSize>0) {
 			totalPage = (totalRecord/pageSize)+1;
 		}else {

@@ -1,6 +1,7 @@
 package com.cfyj.weilan.constant;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,6 +13,8 @@ import java.util.Set;
 public class URLConstant {
 	
 	public static Set<String> no_filter_userUrl = new HashSet<String>();
+	
+	public static Set<String> Restriction_filter_userUrl = new HashSet<String>(); //访问限制的url
 
 	/**
 	 * User的不过滤路径
