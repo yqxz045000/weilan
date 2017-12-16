@@ -1,0 +1,58 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+}
+
+.header {
+	height: 5%;
+	background-color: #000000;
+}
+
+.center {
+	height: 90%;
+	/*background-color: darkgoldenrod;*/
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.left_area {
+	float: left;
+	height: 100%;
+	width: 55%;
+	background-color: orange;
+}
+
+.right_area {
+	float: left;
+	height: 100%;
+	width: 45%;
+	background-color: cornflowerblue;
+}
+
+.memory_area {
+	height: 100%;
+	width: 100%;
+	/*padding: 2%;*/
+	background-color: deepskyblue;
+}
+
+.memoryList{
+	height: 100%;
+	padding-top: 5%;
+	padding-left: 15%;
+}
+
+.memoryContent {	
+	height: 15%;
+	width: 70%;
+	/*margin-top: 20px;*/
+	background-color: white;
+}

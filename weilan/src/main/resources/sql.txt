@@ -1,3 +1,16 @@
+CREATE TABLE `tb_useraccount` (
+  `id` int(11) NOT NULL,
+  `userAccount` varchar(20) NOT NULL,
+  `passwd` varchar(100) DEFAULT NULL,
+  `oldPasswd` varchar(100) DEFAULT NULL,
+  `type` varchar(5) DEFAULT '0',
+  `status` varchar(1) DEFAULT '1',
+  `level` varchar(2) DEFAULT '0',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `tb_userinfo` (
   `id` int(11) NOT NULL,
   `nickname` varchar(20) NOT NULL,
@@ -6,42 +19,109 @@ CREATE TABLE `tb_userinfo` (
   `headImg` varchar(100) NOT NULL,
   `address` varchar(50) DEFAULT '',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modifyTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `phone` varchar(18) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tb_useraccount` (
-  `id` int(11) NOT NULL,
-  `userAccount` varchar(20) NOT NULL,
-  `passwd` varchar(100) NOT NULL,
-  `oldPasswd` varchar(100) NOT NULL,
-  `type` varchar(5) DEFAULT '1',
+CREATE TABLE `tb_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `description` varchar(100) DEFAULT '',
   `status` varchar(1) DEFAULT '1',
-  `level` varchar(2) DEFAULT '1',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modifyTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `tb_category_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `tb_useraccount` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `tb_shortmessage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `categoryId` int(11) NOT NULL,
+  `essayId` int(11) DEFAULT NULL,
+  `content` varchar(200) DEFAULT '',
+  `type` varchar(5) DEFAULT NULL,
+  `status` varchar(1) DEFAULT '1',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `essayId` (`essayId`),
+  KEY `categoryId` (`categoryId`),
+  CONSTRAINT `tb_shortMessage_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `tb_useraccount` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_shortMessage_ibfk_2` FOREIGN KEY (`essayId`) REFERENCES `tb_longmessage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_shortMessage_ibfk_3` FOREIGN KEY (`categoryId`) REFERENCES `tb_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tb_systemcategory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  `description` varchar(100) DEFAULT '',
+  `status` varchar(1) DEFAULT '1',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `tb_longmessage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `categoryId` int(11) NOT NULL,
+  `title` varchar(30) NOT NULL,
+  `contentId` int(11) DEFAULT NULL,
+  `resume` varchar(100) NOT NULL,
+  `bgImg` varchar(100) DEFAULT '',
+  `status` varchar(1) DEFAULT '1',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `categoryId` (`categoryId`),
+  KEY `contentId` (`contentId`),
+  CONSTRAINT `tb_longMessage_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `tb_useraccount` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_longMessage_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `tb_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_longMessage_ibfk_3` FOREIGN KEY (`contentId`) REFERENCES `tb_longmessagecontent` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tb_longmessagecontent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(6000) DEFAULT '',
+  `userId` int(11) NOT NULL,
+  `modifyTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tb_feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `msg` varchar(100) NOT NULL,
+  `replyMsg` varchar(50) DEFAULT '',
+  `type` varchar(2) NOT NULL,
+  `status` varchar(1) DEFAULT '0',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `tb_feedback_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `tb_useraccount` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE TABLE `tb_annoyancewall` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `msg` varchar(100) NOT NULL,
+  `nickName` varchar(20) DEFAULT '',
+  `ip` varchar(20) NOT NULL,
+  `type` varchar(1) NOT NULL,
+  `status` varchar(1) DEFAULT '1',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
