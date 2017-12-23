@@ -1,8 +1,6 @@
 package com.cfyj.weilan.domain.query;
 
-import com.cfyj.weilan.domain.Page;
-
-public class AnnoyanceWallQuery extends Page{
+public class AnnoyanceWallQuery extends PageQuery{
 
 	/**
 	 * 
@@ -13,5 +11,23 @@ public class AnnoyanceWallQuery extends Page{
 	private String msg;
 	
 	private String type;
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 	
 }

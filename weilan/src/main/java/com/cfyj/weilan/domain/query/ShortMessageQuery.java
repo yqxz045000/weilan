@@ -1,8 +1,6 @@
 package com.cfyj.weilan.domain.query;
 
-import com.cfyj.weilan.domain.Page;
-
-public class ShortMessageQuery extends Page{
+public class ShortMessageQuery extends PageQuery{
 
 	/**
 	 * 

@@ -1,20 +1,14 @@
-package com.cfyj.weilan.domain;
+package com.cfyj.weilan.domain.query;
 
-import java.util.List;
+import com.cfyj.weilan.domain.BaseDomain;
 
-/**
- * 
- * @author cfyj
- * 2017年11月11日 下午5:51:44
- *	page对象
- *
- */
-public class Page<T> extends BaseDomain{
-	
+public class PageQuery extends BaseDomain{
+
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8316790964378786456L;
+	private static final long serialVersionUID = 1L;
 
 	private Integer pageNo=1;			//当前页
 	
@@ -24,7 +18,7 @@ public class Page<T> extends BaseDomain{
 	
 	private Integer totalPage=1;		//总页数
 	
-	private List<T> result;			//结果集
+	
 
 	public int getPageNo() {
 		return pageNo==null?0:pageNo;
@@ -65,13 +59,17 @@ public class Page<T> extends BaseDomain{
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-
-	public List<T> getResult() {
-		return result;
-	}
-
-	public void setResult(List<T> result) {
-		this.result = result;
+	
+	public int getBegin() {
+		if(this.pageNo==null) {
+			this.pageNo = 1;
+		}
+		return (this.pageNo-1)*(this.pageSize);
 	}
 	
+	public int getEnd() {
+		return this.pageSize;
+	}
+
+
 }
