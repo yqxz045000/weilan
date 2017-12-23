@@ -12,7 +12,9 @@ import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.domain.query.AnnoyanceWallQuery;
 import com.cfyj.weilan.entity.AnnoyanceWall;
+import com.cfyj.weilan.entity.UserInfoSummary;
 import com.cfyj.weilan.service.AnnoyanceWallService;
+import com.cfyj.weilan.service.UserInfoSummaryService;
 
 
 @Service
@@ -20,7 +22,7 @@ public class AnnoyanceWallServiceImpl implements AnnoyanceWallService {
 	
 	@Autowired
 	private AnnoyanceWallDao annoyanceWallDao; 
-
+	
 	@Override
 	public Response addAnnoyanceWall(AnnoyanceWall annoyanceWall) {
 		Response res = new Response(CodeDict.SUCCESS); 

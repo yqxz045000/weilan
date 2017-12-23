@@ -26,7 +26,7 @@ public class ShortMessageController {
 	@PostMapping("add")
 	public Response add(ShortMessage shortMessage) {
 		Response res;
-		if (StringUtils.isNotBlank(shortMessage.getContent()) && shortMessage.getCategoryId()>0) {
+		if (StringUtils.isNotBlank(shortMessage.getContent()) && shortMessage.getCategoryId()!=null && shortMessage.getCategoryId()>0) {
 			shortMessage.setUserId(userId);
 			res = shortMessageService.addShortMessage(shortMessage);
 		} else {

@@ -10,7 +10,9 @@ import com.cfyj.weilan.dao.CategoryDao;
 import com.cfyj.weilan.domain.CodeDict;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.entity.Category;
+import com.cfyj.weilan.entity.UserInfoSummary;
 import com.cfyj.weilan.service.CategoryService;
+import com.cfyj.weilan.service.UserInfoSummaryService;
 import com.cfyj.weilan.utils.BaseLogUtil;
 /**
  * 
@@ -45,6 +47,7 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 		category.setDescription(des);
 		int num = categoryDao.insertCategory(category);
 		res = num>0? new Response(CodeDict.SUCCESS) : new Response(CodeDict.FAIL);
+	
 		return res;
 	}
 	
@@ -64,6 +67,7 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 		category.setDescription(des);
 		int num = categoryDao.updateCategory(category);
 		res = num>0? new Response(CodeDict.SUCCESS) : new Response(CodeDict.FAIL);
+			
 		return res;
 	}
 

@@ -11,8 +11,10 @@ import com.cfyj.weilan.domain.CodeDict;
 import com.cfyj.weilan.domain.CommonRes;
 import com.cfyj.weilan.domain.UserView;
 import com.cfyj.weilan.entity.User;
+import com.cfyj.weilan.entity.UserInfoSummary;
 import com.cfyj.weilan.service.UserAccountService;
 import com.cfyj.weilan.service.UserInfoService;
+import com.cfyj.weilan.service.UserInfoSummaryService;
 import com.cfyj.weilan.utils.BaseLogUtil;
 import com.cfyj.weilan.utils.MD5Util;
 import com.cfyj.weilan.utils.UserIdUtils;
@@ -25,6 +27,9 @@ public class UserAccountServiceImpl extends BaseLogUtil implements UserAccountSe
 	
 	@Autowired
 	private UserInfoService userInfoService;
+	
+	@Autowired
+	private UserInfoSummaryService userInfoSummaryService;
 
 	private int generatorId_num = 5;
 
@@ -55,6 +60,10 @@ public class UserAccountServiceImpl extends BaseLogUtil implements UserAccountSe
 		
 		try {
 			num = userAccountDao.insertUserAccount(account);	
+			
+			UserInfoSummary summary = new UserInfoSummary();
+			summary.setUserId(id);
+			userInfoSummaryService.addUserInfoSummary(summary);
 		} catch (DuplicateKeyException e) {
 			id = new Integer(UserIdUtils.generatorUserId()+"1");
 			log.error("账户["+account.getUserAccount()+"]生成的id["+account.getId()+"]已存在,重新生成id["+id+"]");
