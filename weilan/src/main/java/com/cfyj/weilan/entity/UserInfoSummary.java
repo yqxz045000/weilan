@@ -19,7 +19,8 @@ public class UserInfoSummary {
 	private Integer categoryNum;	//分类数量
 	private Integer feedbackNum; 	//反馈数量
 	private Integer annoyanceWallNum ; //烦恼墙发布数量
-	private Integer spaceSize; 		//以长文+图片的占用空间
+	private Integer longMessageSpaceSize; 		//长文的占用空间
+	private Integer imgSpaceSize; 		//图片的占用空间
 	
 	private User user ;
 

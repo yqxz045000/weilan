@@ -17,9 +17,18 @@ public interface UserInfoSummaryDao {
 	
 	public int insert(UserInfoSummary userInfoSummary);
 	
+	/**
+	 * 这个insert的插入并不全
+	 * @param userInfoSummary
+	 * @return
+	 */
+	public int insertAll(UserInfoSummary userInfoSummary);
+	
 	public int updateByUserId(UserInfoSummary userInfoSummary);
 
 	public UserInfoSummary findByUserId(@Param("userId") int userId);
+	
+	 
 	
 
 }

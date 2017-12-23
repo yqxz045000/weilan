@@ -9,7 +9,8 @@
 		<result column="categoryNum" property="categoryNum" />
 		<result column="feedbackNum" property="feedbackNum" />
 		<result column="annoyanceWallNum" property="annoyanceWallNum" />
-		<result column="spaceSize" property="spaceSize" />
+		<result column="longMessageSpaceSize" property="longMessageSpaceSize" />
+		<result column="imgSpaceSize" property="imgSpaceSize" />
 		<result column="createTime" property="createTime" />
 		<result column="modifyTime" property="modifyTime" />
 		<association property="userId"
@@ -24,17 +25,19 @@
 		<result column="categoryNum" property="categoryNum" />
 		<result column="feedbackNum" property="feedbackNum" />
 		<result column="annoyanceWallNum" property="annoyanceWallNum" />
-		<result column="spaceSize" property="spaceSize" />
+		<result column="longMessageSpaceSize" property="longMessageSpaceSize" />
+		<result column="imgSpaceSize" property="imgSpaceSize" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		userId,shortMessageNum,longMessageNum,imgNum,categoryNum,feedbackNum,annoyanceWallNum,spaceSize,createTime,modifyTime
+		userId,shortMessageNum,longMessageNum,imgNum,categoryNum,feedbackNum,annoyanceWallNum,longMessageSpaceSize,imgSpaceSize,createTime,modifyTime
 	</sql>
 
 	<insert id="insert" parameterType="com.cfyj.weilan.entity.UserInfoSummary">
 		insert into
 		tb_userInfoSummary(userId) values(#{userId})
 	</insert>
+	
 	<insert id="insertAll" parameterType="com.cfyj.weilan.entity.UserInfoSummary">
 		insert into tb_userInfoSummary
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -106,25 +109,28 @@
 		update tb_userInfoSummary
 		<set>
 			<if test="shortMessageNum !=null">
-				shortMessageNum = shortMessageNum+#{shortMessageNum},
+				shortMessageNum = #{shortMessageNum},
 			</if>
 			<if test="longMessageNum !=null">
-				longMessageNum =longMessageNum+ #{longMessageNum},
+				longMessageNum = #{longMessageNum},
 			</if>
 			<if test=" imgNum!=null">
-				imgNum = imgNum!=null+ #{imgNum},
+				imgNum =  #{imgNum},
 			</if>
 			<if test="categoryNum !=null">
-				categoryNum =categoryNum+ #{categoryNum},
+				categoryNum = #{categoryNum},
 			</if>
 			<if test="feedbackNum !=null">
-				feedbackNum = feedbackNum+ #{feedbackNum},
+				feedbackNum =  #{feedbackNum},
 			</if>
 			<if test="annoyanceWallNum">
-				annoyanceWallNum = annoyanceWallNum +#{annoyanceWallNum},
+				annoyanceWallNum = #{annoyanceWallNum},
 			</if>
-			<if test="spaceSize!=null">
-				spaceSize = spaceSize+ #{spaceSize}
+			<if test="longMessageSpaceSize!=null">
+				longMessageSpaceSize =  #{longMessageSpaceSize}
+			</if>
+			<if test="imgSpaceSize!=null">
+				imgSpaceSize =  #{imgSpaceSize}
 			</if>
 		</set>
 		where userId = #{userId}

@@ -124,7 +124,20 @@ CREATE TABLE `tb_annoyancewall` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `tb_userInfoSummary` (
+  `userId` int(11) primary key,
+  `shortMessageNum` int(11) default 0 COMMENT '短文数量',
+`longMessageNum` int(11) default 0 COMMENT '长文数量',
+`imgNum` int(11) default 0 COMMENT '图片数量',
+`categoryNum` int(11) default 0 COMMENT '分类数量',
+`feedbackNum` int(11) default 0 COMMENT '反馈数量',
+`annoyanceWallNum` int(11) default 0 COMMENT '烦恼发布数量',
+  `longMessageSpaceSize` int(11) default 0 COMMENT '以长文占用空间',
+ `imgSpaceSize` int(11) default 0 COMMENT '以图片占用空间',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 
