@@ -1,6 +1,7 @@
 package com.cfyj.weilan.dao;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +30,7 @@ public interface UserAccountDao {
 
 	public int findNumById(@Param("id") int id);
 	
-	@Select("select count(*) from tb_userAccount where lastLoginTime between #{lasttime} and now() ")
-	public int findByLasttime(@Param("lasttime") Timestamp lasttime);
+	@Select("select id from tb_userAccount where lastLoginTime between #{lasttime} and now() ")
+	public List<Integer> findByLasttime(@Param("lasttime") Timestamp lastime);
 
 }

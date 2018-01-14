@@ -141,6 +141,23 @@
 		<include refid="Base_Column_List" />
 		from tb_userInfoSummary where userId= #{userId}
 	</select>
+	
+	<update id="sumUserInfoSummaryByUserId">
+		UPDATE 
+			 tb_userinfosummary k1,
+			 (select uc.id as userId,
+							(select sum(userId) from tb_longmessage where userId = uc.id) as longnum,
+							(select sum(userId) from tb_shortmessage where userId = uc.id) as shortnum,
+							(select sum(userId) from tb_category where userId = uc.id) as categorynum,
+							(select sum(userId) from tb_feedback where userId = uc.id) as feedbacknum,
+							(select sum(userId) from tb_annoyancewall where userId = uc.id) as wallnum
+							
+							from tb_useraccount  uc  where uc.id=#{userId}) t 
+			 SET k1.shortMessageNum = t.shortnum ,k1.longMessageNum = t.longnum ,k1.categoryNum = t.categorynum, k1.feedbackNum=  t.feedbacknum,k1.annoyanceWallNum = t.wallnum
+			 WHERE k1.userId = t.userId				
+	</update>
+	
+	
 
 </mapper>
 

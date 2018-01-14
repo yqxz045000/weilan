@@ -27,6 +27,8 @@ public interface UserInfoSummaryDao {
 	public int updateByUserId(UserInfoSummary userInfoSummary);
 
 	public UserInfoSummary findByUserId(@Param("userId") int userId);
+
+	public int sumUserInfoSummaryByUserId(@Param("userId")int userId);
 	
 	 
 	

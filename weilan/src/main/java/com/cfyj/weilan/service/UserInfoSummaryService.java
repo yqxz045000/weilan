@@ -18,6 +18,8 @@ public interface UserInfoSummaryService {
 	
 	public boolean editUserInfoSummary(UserInfoSummary userInfoSummary);
 	
+	public boolean sumUserInfoSummary(int userId);
+	
 	/**
 	 * 检测账户是否存在
 	 * @param userId

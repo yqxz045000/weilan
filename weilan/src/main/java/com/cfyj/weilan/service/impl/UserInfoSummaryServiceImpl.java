@@ -1,5 +1,6 @@
 package com.cfyj.weilan.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.query.UserInfoSummaryQuery;
 import com.cfyj.weilan.entity.UserInfoSummary;
 import com.cfyj.weilan.service.UserInfoSummaryService;
+import com.cfyj.weilan.utils.DateUtil;
 
 @Service
 public class UserInfoSummaryServiceImpl implements UserInfoSummaryService {
@@ -49,6 +51,13 @@ public class UserInfoSummaryServiceImpl implements UserInfoSummaryService {
 	public boolean isExitByUserId(int userId) {
 		return userInfoSummaryDao.findByUserId(userId)!=null? true:false;
 
+	}
+
+	@Override
+	public boolean sumUserInfoSummary(int userId) {
+		
+		userInfoSummaryDao.sumUserInfoSummaryByUserId(userId);
+		return true;
 	}
 
 }
