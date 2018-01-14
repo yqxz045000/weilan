@@ -2,7 +2,6 @@ package com.cfyj.weilan.service.impl;
 
 import java.util.List;
 
-import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,8 @@ import com.cfyj.weilan.domain.Page;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.domain.query.AnnoyanceWallQuery;
 import com.cfyj.weilan.entity.AnnoyanceWall;
-import com.cfyj.weilan.entity.UserInfoSummary;
 import com.cfyj.weilan.service.AnnoyanceWallService;
-import com.cfyj.weilan.service.UserInfoSummaryService;
+import com.cfyj.weilan.utils.XXSUtils;
 
 
 @Service
@@ -27,7 +25,8 @@ public class AnnoyanceWallServiceImpl implements AnnoyanceWallService {
 	public Response addAnnoyanceWall(AnnoyanceWall annoyanceWall) {
 		Response res = new Response(CodeDict.SUCCESS); 
 		//TODO做一个消息过滤，过滤一些敏感词
-		annoyanceWall.setMsg(ESAPI.encoder().encodeForHTML(annoyanceWall.getMsg()));
+		
+		annoyanceWall.setMsg(XXSUtils.reEncode(annoyanceWall.getMsg()));
 		annoyanceWallDao.insertAnnoyanceWall(annoyanceWall);	
 		return res;
 	}

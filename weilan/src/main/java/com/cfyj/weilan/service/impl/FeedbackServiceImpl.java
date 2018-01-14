@@ -12,6 +12,7 @@ import com.cfyj.weilan.domain.CodeDict;
 import com.cfyj.weilan.domain.Response;
 import com.cfyj.weilan.entity.Feedback;
 import com.cfyj.weilan.service.FeedbackService;
+import com.cfyj.weilan.utils.XXSUtils;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -25,7 +26,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		Feedback backDB = feedbackDao.findByUserIdAndStatus(back.getUserId(),Constant.STATUS_FREEZE);
 		if(backDB==null) {
 			res = new Response(CodeDict.SUCCESS);
-			back.setMsg(ESAPI.encoder().encodeForHTML(back.getMsg()));
+			back.setMsg(XXSUtils.reEncode(back.getMsg()));
 			feedbackDao.insertFeedback(back);	
 		}else {
 			res = new Response(CodeDict.FAIL);
@@ -37,7 +38,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public Response replyFeedback(Feedback back) {
 		Response res = new Response(CodeDict.SUCCESS);
-		back.setReplyMsg(ESAPI.encoder().encodeForHTML(back.getReplyMsg()));
+		back.setReplyMsg(XXSUtils.reEncode(back.getReplyMsg()));
 		feedbackDao.updateFeedback(back);	//只更改状态和回复
 		return res;
 	}

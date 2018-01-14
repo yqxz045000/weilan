@@ -16,6 +16,7 @@ import com.cfyj.weilan.entity.ShortMessage;
 import com.cfyj.weilan.service.LongMessageService;
 import com.cfyj.weilan.service.ShortMessageService;
 import com.cfyj.weilan.utils.BaseLogUtil;
+import com.cfyj.weilan.utils.XXSUtils;
 
 @Service
 public class LongMessageServiceImpl extends BaseLogUtil implements LongMessageService {
@@ -35,9 +36,8 @@ public class LongMessageServiceImpl extends BaseLogUtil implements LongMessageSe
 		// TODO 这里对背景图片弄一下
 		Response res = new Response(CodeDict.SUCCESS);
 		LongMessageContent content = message.getContent();
-		message.setResume(ESAPI.encoder().encodeForHTML(message.getTitle()));
-		message.setResume(ESAPI.encoder().encodeForHTML(message.getResume()));
-		content.setContent(ESAPI.encoder().encodeForHTML(content.getContent()));
+
+		content.setContent(XXSUtils.reEncode(content.getContent()));
 		content.setUserId(message.getUserId());
 		
 		longMessageContentServiceDao.insertLongMessageContent(content);
@@ -61,9 +61,7 @@ public class LongMessageServiceImpl extends BaseLogUtil implements LongMessageSe
 	public Response editLongMessage(LongMessage message) {
 		Response res = new Response(CodeDict.SUCCESS);
 		LongMessageContent content = message.getContent();
-		message.setResume(ESAPI.encoder().encodeForHTML(message.getTitle()));
-		message.setResume(ESAPI.encoder().encodeForHTML(message.getResume()));
-		content.setContent(ESAPI.encoder().encodeForHTML(content.getContent()));
+		content.setContent(XXSUtils.reEncode(content.getContent()));
 		longMessageContentServiceDao.updateLongMessageContent(content);
 		longMessageServiceDao.updateLongMessage(message);
 

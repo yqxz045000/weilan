@@ -15,6 +15,7 @@ import com.cfyj.weilan.domain.query.ShortMessageQuery;
 import com.cfyj.weilan.entity.ShortMessage;
 import com.cfyj.weilan.service.ShortMessageService;
 import com.cfyj.weilan.utils.BaseLogUtil;
+import com.cfyj.weilan.utils.XXSUtils;
 
 @Service
 public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessageService {
@@ -26,7 +27,7 @@ public class ShortMessageServiceImpl extends BaseLogUtil  implements ShortMessag
 	public Response addShortMessage(ShortMessage message) {
 		Response res ; 
 		
-		message.setContent(ESAPI.encoder().encodeForHTML(message.getContent()));
+		message.setContent(XXSUtils.reEncode(message.getContent()));
 		message.setType(MessageConstant.MESSAGE_TYPE_MEMORY);	
 		int result = shortMessageDao.insertShortMessage(message);
 		if(result >0) {

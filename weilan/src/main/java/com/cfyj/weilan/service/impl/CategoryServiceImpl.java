@@ -14,6 +14,7 @@ import com.cfyj.weilan.entity.UserInfoSummary;
 import com.cfyj.weilan.service.CategoryService;
 import com.cfyj.weilan.service.UserInfoSummaryService;
 import com.cfyj.weilan.utils.BaseLogUtil;
+import com.cfyj.weilan.utils.XXSUtils;
 /**
  * 
  * @author cfyj
@@ -40,11 +41,8 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 			res.setMsg("增加失败：已到达最大数量");
 			return res;
 		}
-		String name = ESAPI.encoder().encodeForHTML(category.getName() );
-		String des =  ESAPI.encoder().encodeForHTML(category.getDescription());
-		log.debug("des:" + des + ",name: "+name);
-		category.setName(name);
-		category.setDescription(des);
+		
+		category.setDescription(XXSUtils.reEncode(category.getDescription()));
 		int num = categoryDao.insertCategory(category);
 		res = num>0? new Response(CodeDict.SUCCESS) : new Response(CodeDict.FAIL);
 	
@@ -55,16 +53,14 @@ public class CategoryServiceImpl extends BaseLogUtil implements CategoryService 
 	public Response editCategory(Category category) {
 		Response res ; 
 		Category dbCategory = categoryDao.findById(category.getId(), category.getUserId());
-		String name = ESAPI.encoder().encodeForHTML(category.getName() );
-		String des =  ESAPI.encoder().encodeForHTML(category.getDescription());
-		if(dbCategory!=null && dbCategory.getName().equals(name)) {
+
+		if(dbCategory!=null && dbCategory.getName().equals(category.getName())) {
 			res = new Response(CodeDict.FAIL);
 			res.setMsg("分类名称已存在");
 			return res;
 		}
-		log.debug("des:" + des + ",name: "+name);
-		category.setName(name);
-		category.setDescription(des);
+
+		category.setDescription(XXSUtils.reEncode(category.getDescription()));
 		int num = categoryDao.updateCategory(category);
 		res = num>0? new Response(CodeDict.SUCCESS) : new Response(CodeDict.FAIL);
 			

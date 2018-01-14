@@ -31,7 +31,7 @@ public class ShortMessageController {
 			res = shortMessageService.addShortMessage(shortMessage);
 		} else {
 			res = new Response(CodeDict.FAIL);
-			res.setMsg("内容和分类为必填项");
+			res.setMsg("添加失败：内容和分类为必填项");
 		}
 		return res;
 	}
