@@ -1,0 +1,66 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	background-color: palevioletred;
+}
+
+.header{
+	height: 10%;
+	background-color: black;	
+}
+
+.center{
+	height: 85%;
+	background-color: #E7EAE3;
+}
+
+.center_left{
+	height: 100%;
+	width: 10%;
+	float: left;
+	background-color: red;
+}
+
+.center_right{
+	height: 100%;
+	width: 10%;
+	float: left;
+	background-color: red;
+}
+
+.center_content{
+	height: 100%;
+	width: 80%;
+	float: left;
+	background-color: #FFEFDB;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

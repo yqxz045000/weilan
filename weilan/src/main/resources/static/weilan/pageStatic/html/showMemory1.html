@@ -18,24 +18,43 @@
 		<link  rel="stylesheet" type="text/css"  href="../css/pageCss/showMemory1.css" />
 		<link  rel="stylesheet" type="text/css"  href="../css/pageCss/cssStyle.css" />
 		<link rel="stylesheet" href="../jsUtil/layui/css/layui.css"  media="all">
-		
+			
 		<script type="text/javascript" src="../js/publicJs.js"></script>
 		<script type="text/javascript" src="../jsUtil/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="../jsUtil/layui/layui.all.js"></script>
+		<script type="text/javascript" src="../jsUtil/layui/layui.js"></script>
 		<script type="text/javascript" src="../js/showMemory1.js"></script>
 		<script src="../jsUtil/layui/layui.js" charset="utf-8"></script>
 	</head>
 
-	<body>
-		
-		<div class="header"></div>
+	<body class="f_14">
+		<canvas id="cas" style="background: rgba(255,255,155,0); position: absolute; z-index: 1;"></canvas>
+		<div class="header">
+			<ul>
+				<li><a href="addMemory.html"></a>  </li>
+				<li><a href="#"></a></li>
+				<li><a href="addMemory.html"> add memory</a></li>
+				<li><a href="#" onclick="toAddCategoryPage();"> add catgegory</a></li>
+				<li><a href="#"> 编辑分类</a></li>
+				<li><a href="#"> 文章列表</a></li>
+				<li><a href="#"> 时光机</a></li>
+				<li><a href="#"> 烦恼墙</a></li>
+				<li><a href="#"> 反馈</a></li>
+				<li><a href="#"> 个人信息设置</a></li>
+				<li><a href="#"> 聊天室</a></li>
+			</ul>
+		</div>
 		<div class="center">
 			<div class="left_area"></div>
 			<div class="right_area">
 				<div class="memory_area">
-					<div class="memoryList">	
+					<div class="memoryList f_16 indent_2">	
 						<ul class="layui-timeline" id="memoryList_ul">
 														
 						</ul>
+					</div>
+					<div class="loadMore">
+						<button href="#" class="layui-btn" onclick="loadMemory()" id="loadMemoryB" > 加载更多</button>			
 					</div>
 				</div>
 				

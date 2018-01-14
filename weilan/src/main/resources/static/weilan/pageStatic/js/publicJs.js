@@ -1,5 +1,7 @@
 //这个值最后要从域中取出
-var submitUrlPrefix = "http://localhost:80/sgrr"
+var submitUrlPrefix = "http://localhost:11090";
+var succes_code = "1";
+var fail_code = "0"; //业务code未定义
 
 //格式化时间 yyyy-MM-dd hh:mm:ss
 function dateFtt(time) { //author: meizz   
@@ -39,4 +41,21 @@ function GetRequest() {
 		}
 	}
 	return theRequest;
+}
+
+function checkRespData(data) {
+	if(data != null && data != undefined && data!='') {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function checkParamIsNull(data) {
+	if(data == null || data == undefined || data=='') {
+		return true;
+	} else {
+		return false;
+	}
+
 }
