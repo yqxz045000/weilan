@@ -1,6 +1,8 @@
 package com.cfyj.weilan.domain;
 
 
+import java.sql.Timestamp;
+
 import com.cfyj.weilan.entity.BaseEntity;
 
 /**
@@ -17,6 +19,8 @@ public class UserAccount extends BaseEntity{
 	private String userAccount; // 帐号
 	private String passwd; // 密码
 	private String oldPasswd; // 旧密码
+	private String ip;//最后登录ip
+	private Timestamp lastLoginTime;//最后登录时间
 
 	/************************ 系统属性 *******************************/
 
@@ -66,5 +70,19 @@ public class UserAccount extends BaseEntity{
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public Timestamp getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(Timestamp lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	
+	
 
 }

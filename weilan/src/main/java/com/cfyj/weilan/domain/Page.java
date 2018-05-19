@@ -16,7 +16,7 @@ public class Page<T> extends BaseDomain{
 	 */
 	private static final long serialVersionUID = 8316790964378786456L;
 
-	private Integer pageNo;			//当前页
+	private Integer pageNo=1;			//当前页
 	
 	private Integer pageSize=10;		//页大小
 	
@@ -74,15 +74,4 @@ public class Page<T> extends BaseDomain{
 		this.result = result;
 	}
 	
-	public int getBegin() {
-		if(this.pageNo==null) {
-			this.pageNo = 1;
-		}
-		return (this.pageNo-1)*(this.pageSize);
-	}
-	
-	public int getEnd() {
-		return this.pageSize;
-	}
-
 }

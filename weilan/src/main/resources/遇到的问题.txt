@@ -3,6 +3,7 @@
 	解决：
 	1.使用ESAPI处理sql注入和xss攻击
 		ESAPI.encoder().encodeForHTML(message.getTitle())
+	2.2.使用replace替换<script> 串
 	
 2.增加敏感词汇过滤	
 

@@ -32,7 +32,7 @@ public class CategoryController {
 			res = categoryService.addCategory(category);
 		}else {
 			res = new Response(CodeDict.FAIL);
-			res.setMsg("名称为必填项");
+			res.setMsg("添加失败：名称为必填项");
 		}
 		return res;
 	}
