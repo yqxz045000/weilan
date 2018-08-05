@@ -18,16 +18,18 @@
 		<result column="type" property="type"  />
 		<result column="status" property="status"  />
 		<result column="level" property="level"  />
+		<result column="ip" property="ip"  />
+		<result column="lastLoginTime" property="lastLoginTime"  />
 		<result column="createTime" property="createTime"  />
 		<result column="modifyTime" property="modifyTime"  />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id,userAccount,passwd,oldPasswd,type,status,level,createTime
+		id,userAccount,passwd,oldPasswd,type,status,level,ip,lastLoginTime,createTime
 	</sql>
 	
 	<sql id="login_Column_List">
-		id,nickname,sex,birthday,headImg,address,phone,userAccount,passwd,oldPasswd,type,status,level,createTime
+		id,nickname,sex,birthday,headImg,address,phone,userAccount,passwd,oldPasswd,type,status,level,ip,lastLoginTime,createTime
 	</sql>
 	<sql id="noPass_Column_List">
 		id,userAccount,type,status,level,createTime

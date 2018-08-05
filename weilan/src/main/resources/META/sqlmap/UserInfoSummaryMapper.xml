@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfyj.weilan.dao.UserInfoSummaryDao">
+	<resultMap id="BaseResultMap" type="com.cfyj.weilan.entity.UserInfoSummary">
+		<id column="userId" property="userId" />
+		<result column="shortMessageNum" property="shortMessageNum" />
+		<result column="longMessageNum" property="longMessageNum" />
+		<result column="imgNum" property="imgNum" />
+		<result column="categoryNum" property="categoryNum" />
+		<result column="feedbackNum" property="feedbackNum" />
+		<result column="annoyanceWallNum" property="annoyanceWallNum" />
+		<result column="longMessageSpaceSize" property="longMessageSpaceSize" />
+		<result column="imgSpaceSize" property="imgSpaceSize" />
+		<result column="createTime" property="createTime" />
+		<result column="modifyTime" property="modifyTime" />
+		<association property="userId"
+			resultMap="com.cfyj.weilan.dao.UserInfoDao.BaseResultMap"></association>
+	</resultMap>
+
+	<resultMap id="NoUserResultMap" type="com.cfyj.weilan.entity.UserInfoSummary">
+		<id column="userId" property="userId" />
+		<result column="shortMessageNum" property="shortMessageNum" />
+		<result column="longMessageNum" property="longMessageNum" />
+		<result column="imgNum" property="imgNum" />
+		<result column="categoryNum" property="categoryNum" />
+		<result column="feedbackNum" property="feedbackNum" />
+		<result column="annoyanceWallNum" property="annoyanceWallNum" />
+		<result column="longMessageSpaceSize" property="longMessageSpaceSize" />
+		<result column="imgSpaceSize" property="imgSpaceSize" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		userId,shortMessageNum,longMessageNum,imgNum,categoryNum,feedbackNum,annoyanceWallNum,longMessageSpaceSize,imgSpaceSize,createTime,modifyTime
+	</sql>
+
+	<insert id="insert" parameterType="com.cfyj.weilan.entity.UserInfoSummary">
+		insert into
+		tb_userInfoSummary(userId) values(#{userId})
+	</insert>
+	
+	<insert id="insertAll" parameterType="com.cfyj.weilan.entity.UserInfoSummary">
+		insert into tb_userInfoSummary
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="shortMessageNum != null">
+				shortMessageNum,
+			</if>
+			<if test="longMessageNum != null">
+				longMessageNum,
+			</if>
+			<if test="imgNum != null">
+				imgNum,
+			</if>
+			<if test="categoryNum != null">
+				categoryNum,
+			</if>
+			<if test="feedbackNum != null">
+				feedbackNum,
+			</if>
+			<if test="annoyanceWallNum != null">
+				annoyanceWallNum,
+			</if>
+			<if test="spaceSize != null">
+				spaceSize,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="shortMessageNum != null">
+				#{shortMessageNum},
+			</if>
+			<if test="longMessageNum != null">
+				#{longMessageNum},
+			</if>
+			<if test="imgNum != null">
+				#{imgNum},
+			</if>
+			<if test="categoryNum != null">
+				#{categoryNum},
+			</if>
+			<if test="feedbackNum != null">
+				#{feedbackNum},
+			</if>
+			<if test="annoyanceWallNum != null">
+				#{annoyanceWallNum},
+			</if>
+			<if test="spaceSize != null">
+				#{spaceSize},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="findBycondition" parameterType="com.cfyj.weilan.domain.query.UserInfoSummaryQuery"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_userInfoSummary
+		<where>
+			<if test="beginTime!=null and endTime!=null">
+				and modifyTime between #{beginTime} and #{endTime}
+			</if>
+			<if test="userId!=null ">
+				and userId= #{userId}
+			</if>
+		</where>
+		limit #{begin},#{end}
+		order by createTime desc
+	</select>
+
+	<update id="updateByUserId" parameterType="com.cfyj.weilan.entity.UserInfoSummary">
+		update tb_userInfoSummary
+		<set>
+			<if test="shortMessageNum !=null">
+				shortMessageNum = #{shortMessageNum},
+			</if>
+			<if test="longMessageNum !=null">
+				longMessageNum = #{longMessageNum},
+			</if>
+			<if test=" imgNum!=null">
+				imgNum =  #{imgNum},
+			</if>
+			<if test="categoryNum !=null">
+				categoryNum = #{categoryNum},
+			</if>
+			<if test="feedbackNum !=null">
+				feedbackNum =  #{feedbackNum},
+			</if>
+			<if test="annoyanceWallNum">
+				annoyanceWallNum = #{annoyanceWallNum},
+			</if>
+			<if test="longMessageSpaceSize!=null">
+				longMessageSpaceSize =  #{longMessageSpaceSize}
+			</if>
+			<if test="imgSpaceSize!=null">
+				imgSpaceSize =  #{imgSpaceSize}
+			</if>
+		</set>
+		where userId = #{userId}
+	</update>
+
+	<select id="findByUserId" resultMap="NoUserResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_userInfoSummary where userId= #{userId}
+	</select>
+	
+	<update id="sumUserInfoSummaryByUserId">
+		UPDATE 
+			 tb_userinfosummary k1,
+			 (select uc.id as userId,
+							(select sum(userId) from tb_longmessage where userId = uc.id) as longnum,
+							(select sum(userId) from tb_shortmessage where userId = uc.id) as shortnum,
+							(select sum(userId) from tb_category where userId = uc.id) as categorynum,
+							(select sum(userId) from tb_feedback where userId = uc.id) as feedbacknum,
+							(select sum(userId) from tb_annoyancewall where userId = uc.id) as wallnum
+							
+							from tb_useraccount  uc  where uc.id=#{userId}) t 
+			 SET k1.shortMessageNum = t.shortnum ,k1.longMessageNum = t.longnum ,k1.categoryNum = t.categorynum, k1.feedbackNum=  t.feedbacknum,k1.annoyanceWallNum = t.wallnum
+			 WHERE k1.userId = t.userId				
+	</update>
+	
+	
+
+</mapper>
+
+
+

@@ -29,6 +29,10 @@ public class User extends BaseEntity {
 	private String type; // 类型，暂不启用，留作扩展
 	private String status; // 状态：正常、冻结、
 	private Integer level; // 级别
+	private String ip;//最后登录ip
+	private Timestamp lastLoginTime;//最后登录时间
+	
+	
 
 	public String getPhone() {
 		return phone;
@@ -133,5 +137,23 @@ public class User extends BaseEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public Timestamp getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Timestamp lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	
+	
 
 }
